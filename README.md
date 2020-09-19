@@ -165,7 +165,7 @@ void display(){                                                                 
 If you change the x values the way I do, you will space the ellipses out equally across the drawing area.
 To add an input, we need to add a local variable to the class, add to the class constructor, add to the class display, and add to our initialization call for loop. 
 
-** class local variable & class constructor & display **
+**class local variable & class constructor & display**
 ```processing
 class ColorCircle{                                                                    // --- CLASS COLORCIRCLE ---
   float x;                                                                            // local variable storing circle's center x
@@ -181,7 +181,7 @@ class ColorCircle{                                                              
 }
 ```
 
-** initialization call for loop in setup **
+**initialization call for loop in setup**
 ```processing
 void setup(){                                                                         // --- SETUP ---
   size(500,500);                                                                      // drawing surface size
