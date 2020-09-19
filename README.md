@@ -151,10 +151,57 @@ void draw(){                                                                    
   } // END FOR
 }
 ```
-10. At the very top of the page, below comments, declare that there will be an array of ColorCircle objects. 
+10. Draw hardcoded ellipses using the class. 
+Do this by adding to the display function/method in ColorCircle.
+The values used are temporary, to be changed soon. 
+Save & Run, to see that your display function is working properly. 
+```processing
+void display(){                                                                     // - DISPLAY CLASS OBJECT
+    fill(0);                                                                          // temporary black fill
+    ellipse( 0,0,100,100);                                                            // ellipse with temporary x, y, r, r valuse
+  }
+```
+11. Add an input x, so you can spread the ellipses out and see that you have 5. 
+If you change the x values the way I do, you will space the ellipses out equally across the drawing area.
+To add an input, we need to add a local variable to the class, add to the class constructor, add to the class display, and add to our initialization call for loop. 
+
+** class local variable & class constructor & display **
+```processing
+class ColorCircle{                                                                    // --- CLASS COLORCIRCLE ---
+  float x;                                                                            // local variable storing circle's center x
+  
+  ColorCircle( float xIn ){                                                           // - CLASS'S CONSTRUCTOR
+    x = xIn;                                                                          // input x value as center x
+  }
+  
+  void display(){                                                                     // - DISPLAY CLASS OBJECT
+    fill(0);                                                                          // temporary black fill
+    ellipse( x,0,100,100);                                                            // ellipse with temporary x, y, r, r valuse 
+  }
+}
+```
+
+** initialization call for loop in setup **
+```processing
+void setup(){                                                                         // --- SETUP ---
+  size(500,500);                                                                      // drawing surface size
+    
+  noStroke();                                                                         // no outlines 
+  ellipseMode( CENTER );                                                              // ellipses drawn (x,y,w,h)
+  
+  // - set aside space for the array of colored cirlces
+  circlesArray = new ColorCircle[ numberCircles ];
+  // - place each circle in the array
+  for ( int circle = 0 ; circle < numberCircles ; circle ++){                         // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ] = new ColorCircle(((1+circle)*width)/(numberCircles+1))  ; // - circleArray value circle is a ColorCircle 
+  } // END FOR
+ }
+```
+
+12. Blah
 ```processing
 ```
-11. At the very top of the page, below comments, declare that there will be an array of ColorCircle objects. 
+13. Blah
 ```processing
 ```
 ## Submit below
