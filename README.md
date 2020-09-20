@@ -494,5 +494,89 @@ class ColorCircle{                                                              
 - Use an if statement in fall to get circles to return to the top once they've reacehd the bottom of the page
 - Let each circle have its own fixed radius
 - Let each circle have its own fixed color
+#### Example of the optional ideas
+```processing
+/*  Lab 2B - NMD 211
+    FirstName LastName
+    September 16, 2020
+    
+    
+    Object arrays
+    - create basic object
+    - make 5+ objects with an array
+    - motion
+*/
+
+ColorCircle[] circlesArray;                                                           // declare global array
+
+// - global variables & other constants
+int numberCircles = 5;                                                                // number of circles
+int circleRed = 0;                                                                    // starting red value
+
+int[] circleRadiuses = {2, 47, 17, 100, 60};                                          // list of all circle radiuses
+float[] circleSpeeds = {1, 2, 0.5, 0.1, 10};                                          // list of all circle travel speeds
+
+void setup(){                                                                         // --- SETUP ---
+  size(500,500);                                                                      // drawing surface size
+    
+  noStroke();                                                                         // no outlines 
+  ellipseMode( CENTER );                                                              // ellipses drawn (x,y,w,h)
+  
+  // - set aside space for the array of colored cirlces
+  circlesArray = new ColorCircle[ numberCircles ];
+  // - place each circle in the array
+  for ( int circle = 0 ; circle < numberCircles ; circle ++){                         // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ] = new ColorCircle(((1+circle)*width)/(numberCircles+1),    // - circleArray value circle is a ColorCircle 
+                                                                                      //   object with x (1+circle)*width)/(numberCircles+1)
+                                             0,                                       // - y = 0 
+                                             circleRadiuses[circle],                  // - radius = radius from our list
+                                             circleSpeeds[circle]);                   // - speed = speed from our list
+  } // END FOR
+}
+
+void draw(){                                                                          // --- DRAW ---
+  background(255, 255, 225);                                                          // background color is off white
+  
+  for ( int circle = 0; circle < numberCircles ; circle ++){                          // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ].display();                                                 //  - display the circle
+    
+    // - change values before next run
+    circlesArray[ circle ].fall();                                                    //  - move the circle down by speed pixels  
+    circleRed += 50;                                                                  //  - increase red value by 50
+  } // END FOR
+  
+  // - Have cycled through all circles in list
+  circleRed = 0;                                                                      // reset red value to 0
+}
+
+class ColorCircle{                                                                    // --- CLASS COLORCIRCLE ---
+  float x;                                                                            // local variable storing circle's center x
+  float y;                                                                            // local variable storing circle's center y
+  int r;                                                                              // local variable storing circle's radius
+  float s;                                                                            // local variable storing circle's speed
+  
+  ColorCircle( float xIn, float yIn, int rad , float speed ){                         // - CLASS'S CONSTRUCTOR
+    x = xIn;                                                                          // input x value as center x
+    y = yIn;                                                                          // input y value as center y
+    r = rad;                                                                          // input rad value as r, the circle's radius
+    s = speed;                                                                        // input y value as s, the circle's falling speed
+  }
+  
+  void display(){                                                                     // - DISPLAY CLASS OBJECT
+    fill( circleRed , 50, 255, 200);                                                  // Set color
+    ellipse( x , y, r, r);                                                            // Draw Shape 
+  }
+  
+  void fall(){                                                                        // - CLASS OBJECT MOTION
+    if ( y < height + (height/5)){                                                    // if the object is above a certain y value (hasn't reached so far down the bottom of the screen yet)
+      y += s;                                                                         // move forward by s pixels
+    }
+    else {                                                                            // the object has reached the lower edge
+      y = - height/5 ;                                                                // return to above top
+    }
+    
+  }
+}
+```
 ## Submit below
 [FirstName LastName - 2C](example.com)
