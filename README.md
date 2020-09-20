@@ -158,7 +158,7 @@ Save & Run, to see that your display function is working properly.
 ```processing
 void display(){                                                                     // - DISPLAY CLASS OBJECT
     fill(0);                                                                          // temporary black fill
-    ellipse( 0,0,100,100);                                                            // ellipse with temporary x, y, r, r valuse
+    ellipse( 0,0,80,80);                                                            // ellipse with temporary x, y, r, r valuse
   }
 ```
 11. Add an input x, so you can spread the ellipses out and see that you have 5. 
@@ -176,7 +176,7 @@ class ColorCircle{                                                              
   
   void display(){                                                                     // - DISPLAY CLASS OBJECT
     fill(0);                                                                          // temporary black fill
-    ellipse( x,0,100,100);                                                            // ellipse with temporary x, y, r, r valuse 
+    ellipse( x,0,80,80);                                                            // ellipse with temporary x, y, r, r valuse 
   }
 }
 ```
@@ -197,11 +197,98 @@ void setup(){                                                                   
   } // END FOR
  }
 ```
+### Motion: Simple Top to Bottom
+The circles are currently stationary. 
+To move them from the top of the page to the bottom, we need to change the y values of each circle.
+12. Add a changeable y value to the class ColorCirce.
 
-12. Blah
+**Add y to the local variables, the constructor, and display.**
+```processing
+class ColorCircle{                                                                    // --- CLASS COLORCIRCLE ---
+  float x;                                                                            // local variable storing circle's center x
+  float y;                                                                            // local variable storing circle's center y
+ 
+  ColorCircle( float xIn, float yIn){                                                 // - CLASS'S CONSTRUCTOR
+    x = xIn;                                                                          // input x value as center x
+    y = yIn;                                                                          // input y value as center y
+  }
+  
+  void display(){                                                                     // - DISPLAY CLASS OBJECT
+    fill(0);                                                  // Set color
+    ellipse( x , y, 80, 80);                                                            // Draw Shape 
+  }
+}
+```
+**Add y to the instance generator in setup.**
+```processing
+void setup(){                                                                         // --- SETUP ---
+  size(500,500);                                                                      // drawing surface size
+    
+  noStroke();                                                                         // no outlines 
+  ellipseMode( CENTER );                                                              // ellipses drawn (x,y,w,h)
+  
+  // - set aside space for the array of colored cirlces
+  circlesArray = new ColorCircle[ numberCircles ];
+  // - place each circle in the array
+  for ( int circle = 0 ; circle < numberCircles ; circle ++){                         // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ] = new ColorCircle(                                         // - circleArray value circle is a ColorCircle 
+                                                ((1+circle)*width)/(numberCircles+1), // x value
+                                                 0)  ;                                // y value
+  } // END FOR
+ }
+```
+13. Add a function/method fall to the class. 
+This will change the y values of the objects. 
+To activate, call it after the object is displayed.
+The motion used is super basic, all the same speed. 
+
+**add y value to class**
+```processing
+class ColorCircle{                                                                    // --- CLASS COLORCIRCLE ---
+  float x;                                                                            // local variable storing circle's center x
+  float y;                                                                            // local variable storing circle's center y
+ 
+  ColorCircle( float xIn, float yIn){                                                 // - CLASS'S CONSTRUCTOR
+    x = xIn;                                                                          // input x value as center x
+    y = yIn;                                                                          // input y value as center y
+  }
+  
+  void display(){                                                                     // - DISPLAY CLASS OBJECT
+    fill(0);                                                                          // Set color
+    ellipse( x , y, 80, 80);                                                          // Draw Shape 
+  }
+  
+  void fall(){                                                                        // - CLASS OBJECT MOTION
+    y += 1;
+  }
+}
+```
+**y value in initialization**
+```processing
+void setup(){                                                                         // --- SETUP ---
+  size(500,500);                                                                      // drawing surface size
+    
+  noStroke();                                                                         // no outlines 
+  ellipseMode( CENTER );                                                              // ellipses drawn (x,y,w,h)
+  
+  // - set aside space for the array of colored cirlces
+  circlesArray = new ColorCircle[ numberCircles ];
+  // - place each circle in the array
+  for ( int circle = 0 ; circle < numberCircles ; circle ++){                         // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ] = new ColorCircle(                                         // - circleArray value circle is a ColorCircle 
+                                              ((1+circle)*width)/(numberCircles+1),   // x value
+                                              0)  ;                                   // y value
+  } // END FOR
+ }
+```
+14.
 ```processing
 ```
-13. Blah
+```processing
+```
+15.
+```processing
+```
 ```processing
 ```
 ## Submit below
