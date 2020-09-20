@@ -281,12 +281,85 @@ void setup(){                                                                   
   } // END FOR
  }
 ```
+#### Code Check In
+The code currently looks like:
+```processing
+/*  Lab 2B - NMD 211
+    FirstName LastName
+    September 16, 2020
+    
+    
+    Object arrays
+    - create basic object
+    - make 5+ objects with an array
+    - motion
+*/
+ColorCircle[] circlesArray;                                                           // declare global array
+
+// - global variables & other constants
+int numberCircles = 5;                                                                // number of circles
+
+void setup(){                                                                         // --- SETUP ---
+  size(500,500);                                                                      // drawing surface size
+    
+  noStroke();                                                                         // no outlines 
+  ellipseMode( CENTER );                                                              // ellipses drawn (x,y,w,h)
+  
+  // - set aside space for the array of colored cirlces
+  circlesArray = new ColorCircle[ numberCircles ];
+  // - place each circle in the array
+  for ( int circle = 0 ; circle < numberCircles ; circle ++){                         // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ] = new ColorCircle(                                         // - circleArray value circle is a ColorCircle 
+                                              ((1+circle)*width)/(numberCircles+1),   // x value
+                                              0)  ;                                   // y value
+  } // END FOR
+ }
+ 
+void draw(){                                                                          // --- DRAW ---
+  background(255, 255, 225);                                                          // background color is off white
+  
+  for ( int circle = 0; circle < numberCircles ; circle ++){                          // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ].display();                                                 //  - display the circle
+  } // END FOR
+  
+}
+
+class ColorCircle{                                                                    // --- CLASS COLORCIRCLE ---
+  float x;                                                                            // local variable storing circle's center x
+  float y;                                                                            // local variable storing circle's center y
+ 
+  ColorCircle( float xIn, float yIn){                                                 // - CLASS'S CONSTRUCTOR
+    x = xIn;                                                                          // input x value as center x
+    y = yIn;                                                                          // input y value as center y
+  }
+  
+  void display(){                                                                     // - DISPLAY CLASS OBJECT
+    fill(0);                                                                          // Set color
+    ellipse( x , y, 80, 80);                                                          // Draw Shape 
+  }
+  
+  void fall(){                                                                        // - CLASS OBJECT MOTION
+    y += 1;
+  }
+}
+```
+### Fall at Different Speeds
 14.
 ```processing
 ```
 ```processing
 ```
 15.
+```processing
+```
+```processing
+```
+#### Code Check In
+The code currently looks like:
+```processing
+```
+### Extra: Multiple Radii and Multiple Colors
+16.
 ```processing
 ```
 ```processing
