@@ -281,6 +281,20 @@ void setup(){                                                                   
   } // END FOR
  }
 ```
+**change the y value**
+```processing
+void draw(){                                                                          // --- DRAW ---
+  background(255, 255, 225);                                                          // background color is off white
+  
+  for ( int circle = 0; circle < numberCircles ; circle ++){                          // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ].display();        //  - display the circle
+  
+      // - change values before next run
+    circlesArray[ circle ].fall();                                                    //  - move the circle down by 1 pixels 
+  
+} // END FOR
+```
+
 #### Code Check In
 The code currently looks like:
 ```processing
@@ -319,8 +333,12 @@ void draw(){                                                                    
   background(255, 255, 225);                                                          // background color is off white
   
   for ( int circle = 0; circle < numberCircles ; circle ++){                          // for each circle in circles 0, 1, 2, 3, 4
-    circlesArray[ circle ].display();                                                 //  - display the circle
-  } // END FOR
+    circlesArray[ circle ].display();        //  - display the circle
+  
+      // - change values before next run
+    circlesArray[ circle ].fall();                                                    //  - move the circle down by 1 pixels 
+  
+} // END FOR
   
 }
 
@@ -344,25 +362,137 @@ class ColorCircle{                                                              
 }
 ```
 ### Fall at Different Speeds
-14.
+14. Each circle needs its own travelling speed. 
+Make a global array of speeds, above our definition of the method\funtion setup.
 ```processing
+// - global variables & other constants
+int numberCircles = 5;                                                                // number of circles
+float[] circleSpeeds = {1, 2, 0.5, 0.1, 10};                                          // list of all circle travel speeds
 ```
+15. Add the circle travel speeds into the ColorCircle class constructor, local variables, and local method/function fall, then add the value into the initialization call. 
+
+**Add speed to ColorCircle class**
 ```processing
+class ColorCircle{                                                                    // --- CLASS COLORCIRCLE ---
+  float x;                                                                            // local variable storing circle's center x
+  float y;                                                                            // local variable storing circle's center y
+  float s;                                                                            // local variable storing circle's speed
+
+ 
+  ColorCircle( float xIn, float yIn, float speed ){                                                 // - CLASS'S CONSTRUCTOR
+    x = xIn;                                                                          // input x value as center x
+    y = yIn;                                                                          // input y value as center y
+    s = speed;                                                                        // input y value as s, the circle's falling speed
+
+  }
+  
+  void display(){                                                                     // - DISPLAY CLASS OBJECT
+    fill(0);                                                                          // Set color
+    ellipse( x , y, 80, 80);                                                          // Draw Shape 
+  }
+  
+  void fall(){                                                                        // - CLASS OBJECT MOTION
+    y += s;
+  }
+}
 ```
-15.
+**ColorCircle Class initialization with speed**
 ```processing
-```
-```processing
+void setup(){                                                                         // --- SETUP ---
+  size(500,500);                                                                      // drawing surface size
+    
+  noStroke();                                                                         // no outlines 
+  ellipseMode( CENTER );                                                              // ellipses drawn (x,y,w,h)
+  
+  // - set aside space for the array of colored cirlces
+  circlesArray = new ColorCircle[ numberCircles ];
+  // - place each circle in the array
+  for ( int circle = 0 ; circle < numberCircles ; circle ++){                         // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ] = new ColorCircle(                                         // - circleArray value circle is a ColorCircle 
+                                              ((1+circle)*width)/(numberCircles+1),   // x value
+                                              0,                                      // y value
+                                              circleSpeeds[circle]);                   // - speed = speed from our list
+
+  } // END FOR
+ }
 ```
 #### Code Check In
 The code currently looks like:
 ```processing
+/*  Lab 2B - NMD 211
+    FirstName LastName
+    September 16, 2020
+    
+    
+    Object arrays
+    - create basic object
+    - make 5+ objects with an array
+    - motion
+*/
+ColorCircle[] circlesArray;                                                           // declare global array
+
+// - global variables & other constants
+int numberCircles = 5;                                                                // number of circles
+float[] circleSpeeds = {1, 2, 0.5, 0.1, 10};                                          // list of all circle travel speeds
+
+
+void setup(){                                                                         // --- SETUP ---
+  size(500,500);                                                                      // drawing surface size
+    
+  noStroke();                                                                         // no outlines 
+  ellipseMode( CENTER );                                                              // ellipses drawn (x,y,w,h)
+  
+  // - set aside space for the array of colored cirlces
+  circlesArray = new ColorCircle[ numberCircles ];
+  // - place each circle in the array
+  for ( int circle = 0 ; circle < numberCircles ; circle ++){                         // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ] = new ColorCircle(                                         // - circleArray value circle is a ColorCircle 
+                                              ((1+circle)*width)/(numberCircles+1),   // x value
+                                              0,                                      // y value
+                                              circleSpeeds[circle]);                   // - speed = speed from our list
+
+  } // END FOR
+ }
+ 
+void draw(){                                                                          // --- DRAW ---
+  background(255, 255, 225);                                                          // background color is off white
+  
+  for ( int circle = 0; circle < numberCircles ; circle ++){                          // for each circle in circles 0, 1, 2, 3, 4
+    circlesArray[ circle ].display();        //  - display the circle
+  
+      // - change values before next run
+    circlesArray[ circle ].fall();                                                    //  - move the circle down by 1 pixels 
+  
+} // END FOR
+  
+}
+
+class ColorCircle{                                                                    // --- CLASS COLORCIRCLE ---
+  float x;                                                                            // local variable storing circle's center x
+  float y;                                                                            // local variable storing circle's center y
+  float s;                                                                            // local variable storing circle's speed
+
+ 
+  ColorCircle( float xIn, float yIn, float speed ){                                                 // - CLASS'S CONSTRUCTOR
+    x = xIn;                                                                          // input x value as center x
+    y = yIn;                                                                          // input y value as center y
+    s = speed;                                                                        // input y value as s, the circle's falling speed
+
+  }
+  
+  void display(){                                                                     // - DISPLAY CLASS OBJECT
+    fill(0);                                                                          // Set color
+    ellipse( x , y, 80, 80);                                                          // Draw Shape 
+  }
+  
+  void fall(){                                                                        // - CLASS OBJECT MOTION
+    y += s;
+  }
+}
 ```
-### Extra: Multiple Radii and Multiple Colors
-16.
-```processing
-```
-```processing
-```
+### (OPTIONAL) Ideas for even more fun code
+- Use an if statement in fall to get circles to return to the top once they've reacehd the bottom of the page
+- Let each circle have its own fixed radius
+- Let each circle have its own fixed color
 ## Submit below
 [FirstName LastName - 2C](example.com)
