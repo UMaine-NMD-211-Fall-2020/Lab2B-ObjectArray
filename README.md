@@ -580,3 +580,4 @@ class ColorCircle{                                                              
 ```
 ## Submit below
 [FirstName LastName - 2B](example.com)
+[Elijah Story - 2B](https://github.com/ElijahStory/Lab2-ElijahStory/tree/master/Lab2B_Elijah_Story)
